@@ -1,4 +1,5 @@
 CC=g++
+MKDIR_P = mkdir -p
 
 ifeq ($(DEBUG),yes)
 	CXXFLAGS=-Wall -g
@@ -20,6 +21,10 @@ OBJ=$(OBJPATH)/hello.o \
 	$(OBJPATH)/main.o
 EXEC=$(BINPATH)/hello
 
+TESTSRC=$(SRCPATH)/factorial.cpp
+TESTOBJ=$(OBJPATH)/factorial.o
+TESTEXEC=$(BINPATH)/factorial
+
 INCLUDES=-I ./$(INCPATH)
 
 default: directories $(EXEC)
@@ -30,15 +35,20 @@ $(EXEC): $(OBJ)
 $(OBJPATH)/%.o: $(SRCPATH)/%.cpp $(INCPATH)/hello.h
 	$(CC) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
-.PHONY: clean cleanall directories
+.PHONY: clean cleanall test directories
+
+test: directories $(TESTEXEC)
+	./$(TESTEXEC) -s
+
+$(TESTEXEC): $(TESTOBJ)
+	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	rm -f $(OBJPATH)/*.o
 
 cleanall: clean
 	rm -f $(EXEC)
-
-MKDIR_P = mkdir -p
 
 directories:
 	$(MKDIR_P) $(BINPATH) $(OBJPATH) $(LIBPATH)
