@@ -15,9 +15,9 @@ LIBPATH=lib
 BINPATH=bin
 
 SRC=$(SRCPATH)/hello.cpp \
-	    $(SRCPATH)/main.cpp
+	$(SRCPATH)/main.cpp
 OBJ=$(OBJPATH)/hello.o \
-	    $(OBJPATH)/main.o
+	$(OBJPATH)/main.o
 EXEC=$(BINPATH)/hello
 
 INCLUDES=-I ./$(INCPATH)
@@ -25,15 +25,15 @@ INCLUDES=-I ./$(INCPATH)
 default: $(EXEC)
 
 $(EXEC): $(OBJ)
-		$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) $(LDFLAGS) -o $@ $^
 
 $(OBJPATH)/%.o: $(SRCPATH)/%.cpp $(INCPATH)/hello.h
-		$(CC) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
 .PHONY: clean cleanall
 
 clean:
-		rm -f $(OBJPATH)/*.o
+	rm -f $(OBJPATH)/*.o
 
 cleanall: clean
-		rm -f $(EXEC)
+	rm -f $(EXEC)
