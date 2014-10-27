@@ -2,3 +2,13 @@ testcpp [![Build Status](https://travis-ci.org/dhiana/testcpp.svg?branch=master)
 =======
 
 Testing Travis with C++
+
+Building
+--------
+
+    $ make
+
+Running
+-------
+
+    $ ./bin/hello
