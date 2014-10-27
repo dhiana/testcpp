@@ -5,7 +5,7 @@ compiler:
 before_install:
   - echo $LANG
   - echo $LC_ALL
-script: make
+script: make && make test
 branches:
   only:
     - master
