@@ -41,4 +41,4 @@ cleanall: clean
 MKDIR_P = mkdir -p
 
 directories:
-	$(MKDIR_P) $(BINPATH) $(OBJPATH)
+	$(MKDIR_P) $(BINPATH) $(OBJPATH) $(LIBPATH)
