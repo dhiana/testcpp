@@ -22,7 +22,7 @@ EXEC=$(BINPATH)/hello
 
 INCLUDES=-I ./$(INCPATH)
 
-default: $(EXEC)
+default: directories $(EXEC)
 
 $(EXEC): $(OBJ)
 	$(CC) $(LDFLAGS) -o $@ $^
@@ -30,10 +30,15 @@ $(EXEC): $(OBJ)
 $(OBJPATH)/%.o: $(SRCPATH)/%.cpp $(INCPATH)/hello.h
 	$(CC) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
-.PHONY: clean cleanall
+.PHONY: clean cleanall directories
 
 clean:
 	rm -f $(OBJPATH)/*.o
 
 cleanall: clean
 	rm -f $(EXEC)
+
+MKDIR_P = mkdir -p
+
+directories:
+	$(MKDIR_P) $(BINPATH) $(OBJPATH)
